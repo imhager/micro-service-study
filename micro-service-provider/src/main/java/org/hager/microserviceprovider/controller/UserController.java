@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "user-service")
 public class UserController {
 
-    // 为了测试load balance
+    // 为了测试load balance，便于区分显示内容
     @Value("${spring.application.name}")
     String applicationName;
 
     @Value("${environment.name}")
     String environName;
 
+    // http://localhost:8771/user-service/detail/jack
     @RequestMapping(value = "/detail/{name}", method = RequestMethod.GET)
     public String getUser(@PathVariable("name") String name) {
         return MessageFormat.format("hi,user_{0},current time is {1}.[data from {2}-{3}]"
