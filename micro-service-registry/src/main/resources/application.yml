@@ -36,7 +36,6 @@ eureka:
 #    enable-self-preservation: false
 
 
-
 ---
 
 spring:

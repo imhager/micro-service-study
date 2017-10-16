@@ -75,36 +75,39 @@ eureka.client.service-url.defaultZone=http://registry-center-cluster-002:8762/eu
 
 ## 完整的集群配置文件（此处只模拟两台集群）
 
-* 第一台 `register server`（registry-center-cluster-001:8761）
+* 第一台 `registry server`（registry-center-cluster-001:8761）
 
 ```bash
 # 站点端口设置，不配置，Eureka默认也是8761
 server.port=8761
 
 # 示例集群配置,需要把registry-center-cluster-001 配置到host文件中
-# 比如 127.0.0.1 registry-center-cluster-001
+# 比如 
+# 127.0.0.1 registry-center-cluster-001
 # 127.0.0.1 registry-center-cluster-002
+#
+#
 eureka.instance.hostname=registry-center-cluster-001
 # 项目名称
 spring.application.name=register-master
-
+#
 # 利用IP地址，而非hostname
 #eureka.instance.prefer-ip-address=true
 
 #通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server.
-# 不注册client端，只注册服务端
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false
+# 不注册client端，只注册服务端,如果是集群方式，默认(默认为true)即可
+# eureka.client.register-with-eureka=false
+# eureka.client.fetch-registry=false
 # 单机配置，配置为自己即可
 #eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
 # 集群配置，配置
-eureka.client.service-url.defaultZone=http://registry-center-cluster-001:8761/eureka/,http://registry-center-cluster-002:8762/eureka/
+eureka.client.service-url.defaultZone=http://registry-center-cluster-002:8762/eureka/
 # 配置启用哪个环境配置文件
 spring.profiles.active=dev
 
 ```
 
-* 第二台 `register server`（registry-center-cluster-002:8762）
+* 第二台 `registry server`（registry-center-cluster-002:8762）
 
 ```bash
 # 站点端口设置，不配置，Eureka默认也是8762
@@ -118,15 +121,17 @@ spring.application.name=register-master
 # 利用IP地址，而非hostname
 #eureka.instance.prefer-ip-address=true
 #通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server.
-# 不注册client端，只注册服务端
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false
+# 不注册client端，只注册服务端,如果是集群方式，默认(默认为true)即可
+# eureka.client.register-with-eureka=false
+# eureka.client.fetch-registry=false
 # 集群配置，配置
-eureka.client.service-url.defaultZone=http://registry-center-cluster-002:8762/eureka/,http://registry-center-cluster-001:8761/eureka/
+eureka.client.service-url.defaultZone=http://registry-center-cluster-001:8761/eureka/
 # 配置启用哪个环境配置文件
 spring.profiles.active=dev
 
 ```
+
+## 2017年10月15日
 
 ## 如果利用yaml配置文件的话，可以这么配置（也建议用yaml文件配置，简单些吧）
 
@@ -185,6 +190,16 @@ eureka:
 spring:
   profiles: registry-center-cluster-002
 ```
+
+## 启动效果
+
+* 节点一
+
+![img](ha-registry-center-cluster-1.png)
+
+* 节点二
+
+![img](ha-registry-center-cluster-2.png)
 
 ## 知识点
 
