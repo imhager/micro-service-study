@@ -1,5 +1,3 @@
-#\u6D4B\u8BD5\u5F53\u524D\u73AF\u5883
-environment.name=dev
-# \u5BF9\u5E94log
+# DEV\u73AF\u5883,\u5F00\u542F\u5BF9\u5E94log
 logging.level.com.netflix.eureka=trace
 logging.level.com.netflix.discovery=trace

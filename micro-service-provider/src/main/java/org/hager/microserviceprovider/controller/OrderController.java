@@ -26,6 +26,7 @@ public class OrderController {
     @Value("${environment.name}")
     String environName;
 
+    // http://localhost:8771/order-service/detail/9527
     @RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
     public String getOrderDetail(@PathVariable("orderId") String orderId) {
         return MessageFormat.format("orderId={0},current time is {1}.[data from {2}-{3}]"

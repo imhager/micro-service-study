@@ -27,6 +27,7 @@ public class UserController {
     String providerUrl;
 
     //GET http://localhost:port/consumer-user/detail?name=xxx
+    // http://localhost:8781/consumer-user/detail?name=jack
     @ResponseBody
     @RequestMapping(value = "/detail")
     public ResponseEntity<String> userInfo(String name) {

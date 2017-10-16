@@ -1,0 +1,57 @@
+# 公共配置
+spring:
+  application:
+    name: registry-center-cluster
+#    同一个项目，application.name一致；
+spring:
+  profiles:
+    active: registry-center-cluster-002
+
+---
+# 第一个节点配置
+#      通过指定 spring.profiles.active=registry-center-cluster-001 来启动第一个节点
+# 比如 java jar micro-service-registry-0.0.1-SNAPSHOT.jar --spring.profiles.active=registry-center-cluster-001
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: registry-center-cluster-001
+  client:
+#  设置为另外一个注册中心节点，这样达到双双彼此互联
+    service-url:
+      defaultZone: http://registry-center-cluster-002:8762/eureka/
+#    默认为true
+    fetch-registry: true
+    register-with-eureka: true
+#    是否启动自我保护模式，如果启用；当该节点有问题时，
+# 如果设置为false，所谓自我保护模式是指，出现网络分区、eureka在短时间内丢失过
+# 多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除。默认为true
+  server:
+    enable-self-preservation: false
+
+spring:
+  profiles: registry-center-cluster-001
+
+---
+
+
+# 第二个节点配置
+#      通过指定 spring.profiles.active=registry-center-cluster-002 来启动第二个节点
+
+
+server:
+  port: 8762
+
+
+eureka:
+  instance:
+    hostname: registry-center-cluster-002
+  client:
+#  设置为另外一个注册中心节点，这样达到双双彼此互联
+    service-url:
+      defaultZone: http://registry-center-cluster-001:8761/eureka/
+
+spring:
+  profiles: registry-center-cluster-002
