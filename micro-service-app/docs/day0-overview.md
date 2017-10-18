@@ -3,6 +3,7 @@
 * https://projects.spring.io/spring-cloud/
 * http://cloud.spring.io/spring-cloud-static/Dalston.SR4/multi/multi_spring-cloud.html
 * http://blog.csdn.net/lc0817/article/details/54375802 问题集锦
+* http://blog.csdn.net/qq_22841811/article/category/6808338 系列文章 ★★★
 
 ## Distributed/versioned configuration
 * spring-cloud-config-server
@@ -38,8 +39,8 @@ and a simple convention over configuration approach to reverse proxy creation
   扩展成从Eureka注册中心中获取服务端列表。同时它也会用NIWSDiscoveryPing来取代IPing，它将职责委托给Eureka来确定服务端是否已经启动。
 
 ## api-gateway
-
-> api网关
+* zuul
+* http://blog.didispace.com/springcloud5/
 
 ## Circuit Breakers
 
