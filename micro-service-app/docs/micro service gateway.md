@@ -23,3 +23,6 @@
 zuul.routes.user-service.path=/user-service/**
 zuul.routes.user-service.serviceId=micro-service-provider
 ```
+### 如果配置多个服务分发怎么办？上述路由方式略显不足了
+* 其实，`spring cloud zuul` 已经帮我们做了默认配置。默认情况下，Zuul会代理所有注册到Eureka Server的微服务，并且Zuul的路由规则如下：http://ZUUL_HOST:ZUUL_PORT/微服务在Eureka上的serviceId/**会被转发到serviceId对应的微服务。
+* 验证地址 `http://10.167.3.99:9761/micro-service-provider/user-service/detail/jack` 就可以正常分发了。
