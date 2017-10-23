@@ -73,7 +73,7 @@ logging.level.com.netflix.discovery=off
 eureka.client.service-url.defaultZone=http://registry-center-cluster-002:8762/eureka/,http://registry-center-cluster-001:8761/eureka/
 ```
 
-## 完整的集群配置文件（此处只模拟两台集群）
+## 完整的集群配置文件（此处只模拟两台集群，相互备份，同步数据）
 
 * 第一台 `registry server`（registry-center-cluster-001:8761）
 
@@ -133,7 +133,7 @@ spring.profiles.active=dev
 
 ## 2017年10月15日
 
-## 如果利用yaml配置文件的话，可以这么配置（也建议用yaml文件配置，简单些吧）
+## 如果利用yaml配置文件的话，可以这么配置（也建议用yaml文件配置，可以多个配置在一个文件里，这样就可以在多节点部署时，公用一套yml文件配置）
 
 ```bash
 # 公共配置
@@ -200,6 +200,35 @@ spring:
 * 节点二
 
 ![img](ha-registry-center-cluster-2.png)
+
+
+## 如何启用注册中心认证，提高安全性
+
+> 上述方式，无疑是在裸奔，不过一般情况下都是部署在内网环境，而且也不会对外允许访问；所以还好。但是如果加上安全认证，可谓更好些吧。
+
+### 依赖包，需要引入`spring-boot-starter-security`
+
+```java
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+### 相关配置更改
+
+```xml
+# 启用注册中心服务认证控制，并设置账户密码，此时使用到该eureka server地址的地方，需要更改为
+# http://{username}:{password}@registry-center-cluster-001:8761/eureka/
+# 比如 http://hager:123456@registry-center-cluster-001:8761/eureka/
+security:
+  basic:
+    enabled: true
+  user:
+    name: hager
+    password: 123456
+```
+
 
 ## 知识点
 

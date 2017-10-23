@@ -1,9 +1,0 @@
-# \u6B63\u5F0F\u73AF\u5883\uFF0C\u5173\u95ED\u5BF9\u5E94log
-logging.level.com.netflix.eureka=off
-logging.level.com.netflix.discovery=off
-
-# \u6B63\u5F0F\u73AF\u5883\uFF0C\u542F\u7528\u8D26\u6237\u5BC6\u7801\u6821\u9A8C\uFF0C\u63D0\u9AD8\u5B89\u5168\u6027
-security.basic.enabled=true
-#\u4E34\u65F6\u6A21\u62DF\u8D26\u6237\u5BC6\u7801\uFF0C\u540E\u7EED\u53EF\u4EE5\u505A\u9274\u6743\u65B9\u5F0F\u63A7\u5236
-security.user.name=user
-security.user.password=111111

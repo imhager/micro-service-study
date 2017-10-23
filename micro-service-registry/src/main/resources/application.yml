@@ -25,7 +25,17 @@ eureka:
     hostname: registry-center-cluster-001
   client:
     service-url:
-      defaultZone: http://registry-center-cluster-002:8762/eureka/
+      defaultZone: http://hager:12345@registry-center-cluster-002:8762/eureka/
+
+# 启用注册中心服务认证控制，并设置账户密码，此时使用到该eureka server地址的地方，需要更改为
+# http://{username}:{password}@registry-center-cluster-001:8761/eureka/
+security:
+  basic:
+    enabled: true
+  user:
+    name: hager
+    password: 123456
+
 ##    默认为true
 #    fetch-registry: true
 #    register-with-eureka: true
@@ -34,7 +44,6 @@ eureka:
 # 多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除。默认为true
 #  server:
 #    enable-self-preservation: false
-
 
 ---
 
@@ -53,4 +62,13 @@ eureka:
     hostname: registry-center-cluster-002
   client:
     service-url:
-      defaultZone: http://registry-center-cluster-001:8761/eureka/
+      defaultZone: http://hager:123456@registry-center-cluster-001:8761/eureka/
+
+# 启用注册中心服务认证控制，并设置账户密码，此时使用到该eureka server地址的地方，需要更改为
+# http://{username}:{password}@registry-center-cluster-001:8761/eureka/
+security:
+  basic:
+    enabled: true
+  user:
+    name: hager
+    password: 12345
