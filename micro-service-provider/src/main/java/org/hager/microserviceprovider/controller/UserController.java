@@ -2,17 +2,20 @@ package org.hager.microserviceprovider.controller;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * User: wzh
  * Date: 2017/9/27 16:17
  * Description:
+ *
+ * @author Admin
  */
 
 @RestController
@@ -34,5 +37,16 @@ public class UserController {
                 , new Date()
                 , applicationName
                 , environName);
+    }
+
+
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public String getUsers(@RequestBody Map<String, Object> params) {
+        StringBuilder sb = new StringBuilder();
+        for (String key : params.keySet()) {
+            sb.append("key=" + key + ",value=" + params.get(key));
+        }
+
+        return String.format("params:%s", sb.toString());
     }
 }
