@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Map;
 
+import org.hager.microserviceinterfaceconventions.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,11 +31,14 @@ public class UserController {
     @Value("${environment.name}")
     String environName;
 
+    @Autowired
+    UserService userService;
+
     // http://localhost:8771/user-service/detail/jack
     @RequestMapping(value = "/detail/{name}", method = RequestMethod.GET)
     public String getUser(@PathVariable("name") String name) {
         return MessageFormat.format("hi,user_{0},current time is {1}.[data from {2}-{3}]"
-                , name
+                , userService.getUser(name)
                 , new Date()
                 , applicationName
                 , environName);

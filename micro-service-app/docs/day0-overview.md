@@ -1,83 +1,55 @@
-# feature
-* http://cloud.spring.io/spring-cloud-netflix/
-* https://projects.spring.io/spring-cloud/
-* http://cloud.spring.io/spring-cloud-static/Dalston.SR4/multi/multi_spring-cloud.html
-* http://blog.csdn.net/lc0817/article/details/54375802 问题集锦
-* http://blog.csdn.net/qq_22841811/article/category/6808338 系列文章 ★★★
+# 创建项目
 
-## Distributed/versioned configuration
-* spring-cloud-config-server
-* config-client
+## micro-service-registry
+> service registry
 
-## Service registration and discovery
+* 依赖 `eureka-server`
 
-* eureka discovery client
-    * 服务消费方consumer：利用restTemplate 发起Rest请求
-    * 服务提供方provider：以rest方式对外提供服务
-* eureka server
-    * 注册中心角色
+## micro-service-provider
+> 服务提供者
 
-## Routing
+* 依赖 `eureka discovery client`
 
-* Router and Filter: automatic regsitration of Zuul filters, 
-and a simple convention over configuration approach to reverse proxy creation
-* http://blog.csdn.net/qq_18675693/article/details/53282031
+## micro-service-consumer
+> 服务消费者，同时也可以作为服务提供者使用；因为都是注册到了注册中心；
 
-## Service-to-service calls
+* 依赖 `eureka discovery client`、`Ribbon`
 
-* RestTemplate、feign
+## micro-service-consumer-feign
+> 服务消费者，同时也可以作为服务提供者使用；因为都是注册到了注册中心；
 
-## Load balancing
+* 依赖 `eureka discovery client`、`Feign`
 
-* Client Side Load Balancer: Ribbon
+## micro-service-conf-server
+> 分布式配置中心
 
-#### ribbon
+* 依赖 `config server`
 
-> Ribbon是一个基于HTTP和TCP客户端的负载均衡器。Feign中也使用Ribbon。
-  Ribbon可以在通过客户端中配置的ribbonServerList服务端列表去轮询访问以达到均衡负载的作用。
-  当Ribbon与Eureka联合使用时，ribbonServerList会被DiscoveryEnabledNIWSServerList重写，
-  扩展成从Eureka注册中心中获取服务端列表。同时它也会用NIWSDiscoveryPing来取代IPing，它将职责委托给Eureka来确定服务端是否已经启动。
+## micro-service-app
+> 基于springBoot + JPA + thymeleaf 的Web项目；后续用于整合一些功能的使用
 
-## api-gateway
-* zuul
-* http://blog.didispace.com/springcloud5/
+## 测试项目功能(依次启动)
+* `micro-service-registry` 注册中心，为了测试集群功能，启动两个
+  * 构建高可用注册中心
+  * 启动方式（打开两个cmd窗口，然后各自执行一条，等两个节点都正常启动后，会提示阶段UP状态）
+  * `java -jar micro-service-registry-0.0.1-SNAPSHOT.jar --spring.profiles.active=registry-center-cluster-001`
+  * `java -jar micro-service-registry-0.0.1-SNAPSHOT.jar --spring.profiles.active=registry-center-cluster-002`
+    
+* `micro-service-provider` 服务提供方 为了测试Ribbon功能，启动两个
+    * `java -jar micro-service-provider-0.0.1-SNAPSHOT.jar --server.port=8771`
+    * `java -jar micro-service-provider-0.0.1-SNAPSHOT.jar --server.port=8772`
+    
+* `micro-service-consumer` 服务消费方
+    * `java -jar micro-service-consumer-0.0.1-SNAPSHOT.jar --server.port=8781`
+    
+* `micro-service-consumer-feign` 服务消费方，集成了feign请求
+    * `java -jar micro-service-consumer-feign-0.0.1-SNAPSHOT.jar --server.port=8782`
 
-## Circuit Breakers
+* `micro-service-conf-server` 配置中心服务端
 
-* Hystrix
-* http://blog.csdn.net/qq_18675693/article/details/53282031
-
-## Global locks
-
-* 
-
-## Leadership election and cluster state
-
-* 
-
-## Distributed messaging
-
-* http://cloud.spring.io/spring-cloud-bus
+* `micro-service-conf-client` 配置中心客户端
 
 
-## micro-feign-client
-
-> Feign是一个声明式的Web Service客户端，它使得编写Web Serivce客户端变得更加简单。
-我们只需要使用Feign来创建一个接口并用注解来配置它既可完成。
-它具备可插拔的注解支持，包括Feign注解和JAX-RS注解。
-Feign也支持可插拔的编码器和解码器。
-Spring Cloud为Feign增加了对Spring MVC注解的支持，还整合了Ribbon和Eureka来提供均衡负载的HTTP客户端实现。
-
-
-
-
-## oauth security
-
-> 接口调用安全验证
-
-## reference
-
-* http://blog.csdn.net/forezp/article/details/69696915
-* http://www.360doc.cn/mip/617789585.html
-* http://blog.didispace.com/springcloud2/
-* http://www.cnblogs.com/lazio10000/p/5510852.html
+## micro-app
+> 基于spring boot、thymeleaf、jpa 的Web站点
+> 勾选了 Web、aspects、thyme leaf、JPA、mysql、lombok、cache

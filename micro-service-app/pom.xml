@@ -6,7 +6,8 @@
 	<groupId>org.hager</groupId>
 	<artifactId>micro-service-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+
+    <packaging>pom</packaging>
 
 	<name>micro-service-app</name>
 	<description>Demo project for Spring Boot</description>

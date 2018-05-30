@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "consumer-user-feign")
 public class UserController {
 
+    // 注入使用了Feign Client的client对象
     @Autowired
-    UserServiceClient userServiceClient; // 注入使用了Feign Client的client对象
+    UserServiceClient userServiceClient;
 
     // 模拟GET请求
     @RequestMapping(value = "/info")

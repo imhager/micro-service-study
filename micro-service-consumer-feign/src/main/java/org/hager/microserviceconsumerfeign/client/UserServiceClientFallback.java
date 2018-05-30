@@ -4,21 +4,19 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Date: 2017/10/23 15:28
- * Description: 实现熔断时返回
+ * Description: 实现熔断时返回,当请求失败或熔断时，就会调用对应方法
+ * 不需要对方法设置requestMapping规则
  *
  * @author wzh
  */
 
 @Component
-public class UserServiceClientHystrix implements UserServiceClient {
+public class UserServiceClientFallback implements UserServiceClient {
 
     @Override
-    @RequestMapping(method = RequestMethod.GET, value = "/user-service/detail/{name}")
     public String getUser(@PathVariable("name") String name) {
         return "来自熔断实现返回信息:name=" + name;
     }
