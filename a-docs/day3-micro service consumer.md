@@ -50,3 +50,7 @@ feign.hystrix.enabled=true
 > 请求地址：`http://localhost:8782/consumer-user-feign/list`
 * 正常访问时：返回 `params:key=key_3,value=value_4key=key_2,value=value_2key=key_1,value=value_1`
 * 异常访问时，返回 `来自熔断实现返回信息:params:key=key_3,value=value_4key=key_2,value=value_2key=key_1,value=value_1`
+
+### 需要注意的点
+* 如果方法上使用`@GetMapping`注解，可能会提示错误`Method getUser not annotated with HTTP method type (ex. GET, POST)`
+* 建议使用`RequstMapping(value='xxx',method=xxxx)`明确指定请求支持方法

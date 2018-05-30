@@ -5,7 +5,7 @@
 * http://blog.csdn.net/lc0817/article/details/54375802 问题集锦
 * http://blog.csdn.net/qq_22841811/article/category/6808338 系列文章 ★★★
 * http://ifeve.com/%E3%80%8Aspring-cloud-netflix%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E3%80%8B7-%E5%A3%B0%E6%98%8E%E5%BC%8F-rest-%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9A-feign/
-
+* http://blog.didispace.com/Spring-Cloud%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/
 
 ## Distributed/versioned configuration
 * spring-cloud-config-server

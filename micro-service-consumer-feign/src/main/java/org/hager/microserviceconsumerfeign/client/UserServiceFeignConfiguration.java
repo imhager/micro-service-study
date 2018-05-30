@@ -33,10 +33,12 @@ public class UserServiceFeignConfiguration {
         return new Request.Options(FIVE_SECONDS, FIVE_SECONDS);
     }
 
-    @Bean
-    public Contract feignContract() {
-        return new feign.Contract.Default();
-    }
+    // 这容易出问题是： Method getUsers not annotated with HTTP method type (ex. GET, POST)
+    // https://www.cnblogs.com/myibm/p/8032684.html
+    // @Bean
+    // public Contract feignContract() {
+    //     return new feign.Contract.Default();
+    // }
 
     /**
      * 鉴权时，设置

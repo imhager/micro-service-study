@@ -47,11 +47,8 @@ public class UserController {
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public String getUsers(@RequestBody Map<String, Object> params) {
-        StringBuilder sb = new StringBuilder();
-        for (String key : params.keySet()) {
-            sb.append("key=" + key + ",value=" + params.get(key));
-        }
+        String sb = userService.getUsers(params);
 
-        return String.format("params:%s", sb.toString());
+        return String.format("params:%s", sb);
     }
 }

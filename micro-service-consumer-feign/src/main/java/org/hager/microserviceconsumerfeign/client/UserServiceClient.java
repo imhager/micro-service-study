@@ -3,7 +3,6 @@ package org.hager.microserviceconsumerfeign.client;
 import java.util.Map;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
         , configuration = UserServiceFeignConfiguration.class)
 public interface UserServiceClient {
 
-    @GetMapping(value = "/user-service/detail/{name}")
+    @RequestMapping(value = "/user-service/detail/{name}", method = RequestMethod.GET)
     String getUser(@PathVariable("name") String name);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/user-service/list")
+    @RequestMapping(value = "/user-service/list", method = RequestMethod.POST)
     String getUsers(@RequestBody Map<String, Object> params);
 }

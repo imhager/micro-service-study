@@ -34,10 +34,13 @@
   * 启动方式（打开两个cmd窗口，然后各自执行一条，等两个节点都正常启动后，会提示阶段UP状态）
   * `java -jar micro-service-registry-0.0.1-SNAPSHOT.jar --spring.profiles.active=registry-center-cluster-001`
   * `java -jar micro-service-registry-0.0.1-SNAPSHOT.jar --spring.profiles.active=registry-center-cluster-002`
-    
+  * 通过访问http://{eureka.instance.hostname}:{port}进行检车是否正常
+    * 比如 http://registry-center-cluster-001:8761,如果开启了安全认证，需要填写对应的账户和密码
+  
 * `micro-service-provider` 服务提供方 为了测试Ribbon功能，启动两个
     * `java -jar micro-service-provider-0.0.1-SNAPSHOT.jar --server.port=8771`
     * `java -jar micro-service-provider-0.0.1-SNAPSHOT.jar --server.port=8772`
+    * 通过访问http://localhost:8771/user-service/detail/jack 验证原始服务提供方是否正常
     
 * `micro-service-consumer` 服务消费方
     * `java -jar micro-service-consumer-0.0.1-SNAPSHOT.jar --server.port=8781`
