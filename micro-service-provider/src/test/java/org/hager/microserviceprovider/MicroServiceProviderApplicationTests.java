@@ -9,8 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class MicroServiceProviderApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+
+        StringBuilder sb = new StringBuilder();
+
+        System.out.println(sb.length());
+    }
 
 }
