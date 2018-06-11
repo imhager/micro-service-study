@@ -44,6 +44,9 @@ and a simple convention over configuration approach to reverse proxy creation
 * zuul
 * http://blog.didispace.com/springcloud5/
 
+## zuul 聚合服务
+* RxJava
+
 ## Circuit Breakers
 
 * Hystrix

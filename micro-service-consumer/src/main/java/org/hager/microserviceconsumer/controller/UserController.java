@@ -2,6 +2,7 @@ package org.hager.microserviceconsumer.controller;
 
 import java.text.MessageFormat;
 
+import org.hager.microserviceinterfaceconventions.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +27,14 @@ public class UserController {
     @Value("${service.provider.application.name}")
     String providerUrl;
 
-    //GET http://localhost:port/consumer-user/detail?name=xxx
-    // http://localhost:8781/consumer-user/detail?name=jack
+    //GET http://localhost:port/consumer-user/detail?userId=9527
+    // http://localhost:8781/consumer-user/detail?userId=9527
     @ResponseBody
     @RequestMapping(value = "/detail")
-    public ResponseEntity<String> userInfo(String name) {
+    public ResponseEntity<UserModel> userInfo(Long userId) {
 
-        String uriUser = MessageFormat.format("{0}/user-service/detail/{1}", providerUrl, name);
+        String uriUser = MessageFormat.format("{0}/user-service/detail/{1}", providerUrl, 9527);
 
-        return restTemplate.getForEntity(uriUser, String.class);
+        return restTemplate.getForEntity(uriUser, UserModel.class);
     }
 }

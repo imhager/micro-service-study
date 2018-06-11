@@ -1,5 +1,6 @@
 package org.hager.microserviceinterfaceconventions.services;
 
+import org.hager.microserviceinterfaceconventions.model.OrderModel;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
@@ -9,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 public interface OrderService {
 
-    String getOrderDetail(@PathVariable("orderId") String orderId);
+    OrderModel getOrderDetail(@PathVariable("orderId") Long orderId);
 }

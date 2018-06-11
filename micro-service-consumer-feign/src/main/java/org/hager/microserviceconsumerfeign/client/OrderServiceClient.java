@@ -1,5 +1,6 @@
 package org.hager.microserviceconsumerfeign.client;
 
+import org.hager.microserviceinterfaceconventions.model.OrderModel;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface OrderServiceClient {
 
 
-    @RequestMapping(value = "/order-service/detail/{orderId}", method = RequestMethod.GET)
-    String getOrderDetail(@PathVariable("orderId") String orderId);
+    @RequestMapping(value = "micro-service-provider/order-service/detail/{orderId}", method = RequestMethod.GET)
+    OrderModel getOrderDetail(@PathVariable("orderId") Long orderId);
 }
